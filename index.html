@@ -3,40 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <title>Pooja ji, will you be mine? 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       text-align: center;
       font-family: 'Comic Sans MS', cursive;
-      margin-top: 100px;
+      margin: 0;
+      padding-top: 100px;
       background-color: #fff0f5;
-      overflow: hidden;
     }
+
     h1 {
       color: #d63384;
+      margin: 20px;
     }
+
     button {
       padding: 15px 25px;
-      margin: 20px;
+      margin: 10px;
       font-size: 20px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s ease;
+      transition: transform 0.3s ease;
     }
+
     #yes {
       background-color: #28a745;
       color: white;
-      z-index: 1;
     }
+
     #no {
       background-color: #dc3545;
       color: white;
-      position: absolute;
-      z-index: 2;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
+
     #message {
       margin-top: 20px;
       font-size: 18px;
@@ -59,7 +60,8 @@
       "Soch lo... 😏",
       "Ek baar aur soch lo 🥹",
       "Itni bhi jaldi kya hai? 🤭",
-      "Bas karo, maan bhi jao 💖"
+      "Bas karo, maan bhi jao 💖",
+      "Aakhri baar puchh raha hoon 😔"
     ];
 
     let noClickCount = 0;
@@ -74,23 +76,10 @@
 
     noBtn.addEventListener('click', () => {
       noClickCount++;
-
+      
       yesBtn.style.transform = scale(${1 + noClickCount * 0.1});
 
-      const newMessage = document.createElement("div");
-      newMessage.innerText = noMessages[Math.min(noClickCount - 1, noMessages.length - 1)];
-      newMessage.style.fontSize = "14px";
-      newMessage.style.color = "red";
-      newMessage.style.marginTop = "5px";
-      noBtn.parentNode.insertBefore(newMessage, noBtn.nextSibling);
-
-      const angle = Math.random() * 2 * Math.PI;
-      const radius = 100 + noClickCount * 10;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
-
-      noBtn.style.left = ${Math.min(window.innerWidth - 100, Math.max(0, window.innerWidth / 2 + x))}px;
-      noBtn.style.top = ${Math.min(window.innerHeight - 50, Math.max(0, window.innerHeight / 2 + y))}px;
+      message.innerText = noMessages[Math.min(noClickCount - 1, noMessages.length - 1)] || "Tum mana nahi kar sakti 😌";
     });
   </script>
 </body>
