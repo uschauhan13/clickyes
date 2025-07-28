@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pooja ji, Will You Be Mine?</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #fff0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #e60073;
+    }
+
+    #yesBtn, #noBtn {
+      padding: 15px 30px;
+      font-size: 20px;
+      margin: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    #yesBtn {
+      background-color: #ff66b2;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #cccccc;
+      color: #333;
+      position: absolute;
+    }
+
+    #message {
+      position: absolute;
+      font-size: 18px;
+      color: #800040;
+      font-weight: bold;
+      top: 70%;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Pooja ji, will you be mine? 💖</h1>
+  <button id="yesBtn">Yes 😊</button>
+  <button id="noBtn">No 🙈</button>
+  <div id="message"></div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const message = document.getElementById('message');
+    let yesSize = 20;
+    let noClickCount = 0;
+
+    const messages = [
+      "Soch lo...",
+      "Ek baar aur soch lo...",
+      "Itni bhi jaldi nahi hai!",
+      "Bas karo, maan bhi jao 😭",
+      "Arey ruk jao na!",
+      "Main ro dunga ab 😢"
+    ];
+
+    yesBtn.addEventListener('click', () => {
+      document.body.innerHTML = `
+        <div style="text-align:center; font-size: 2.5em; color:#e6005c; padding: 30px;">
+          💖 Finally! I knew it, Pooja ji 💖<br><br>
+          <span style="font-size: 1.5em;">Get ready for a beautiful journey ahead 😊</span>
+        </div>`;
+    });
+
+    function moveButton() {
+      let x = Math.random() * (window.innerWidth - 100);
+      let y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.left = \\${x}px\;
+      noBtn.style.top = \\${y}px\;
+
+      let msg = messages[Math.min(noClickCount, messages.length - 1)];
+      message.innerText = msg;
+      message.style.left = \\${x}px\;
+      message.style.top = \\${y + 50}px\;
+
+      yesSize += 10;
+      yesBtn.style.fontSize = \\${yesSize}px\;
+
+      noClickCount++;
+    }
+
+    noBtn.addEventListener('mouseenter', moveButton);
+    noBtn.addEventListener('click', moveButton);
+  </script>
+
+</body>
+</html>
