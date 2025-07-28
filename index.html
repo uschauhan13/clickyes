@@ -2,108 +2,93 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pooja ji, Will You Be Mine?</title>
+  <title>Pooja ji, will you be mine? 💖</title>
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive;
-      background-color: #fff0f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
       text-align: center;
+      font-family: 'Comic Sans MS', cursive;
+      margin-top: 100px;
+      background-color: #fff0f5;
       overflow: hidden;
-      position: relative;
     }
-
     h1 {
-      font-size: 2.8em;
-      color: #e60073;
+      color: #d63384;
     }
-
-    #yesBtn, #noBtn {
-      padding: 15px 30px;
-      font-size: 20px;
+    button {
+      padding: 15px 25px;
       margin: 20px;
+      font-size: 20px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
+      transition: 0.3s ease;
     }
-
-    #yesBtn {
-      background-color: #ff66b2;
+    #yes {
+      background-color: #28a745;
       color: white;
+      z-index: 1;
     }
-
-    #noBtn {
-      background-color: #cccccc;
-      color: #333;
+    #no {
+      background-color: #dc3545;
+      color: white;
       position: absolute;
+      z-index: 2;
     }
-
     #message {
-      position: absolute;
+      margin-top: 20px;
       font-size: 18px;
-      color: #800040;
-      font-weight: bold;
-      top: 70%;
+      color: #ff0000;
     }
   </style>
 </head>
 <body>
-
-  <h1>Pooja ji, will you be mine? 💖</h1>
-  <button id="yesBtn">Yes 😊</button>
-  <button id="noBtn">No 🙈</button>
+  <h1>Pooja ji, will you be mine? 🥺❤</h1>
+  <button id="yes">Yes 😍</button>
+  <button id="no">No 🙈</button>
   <div id="message"></div>
 
   <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yes');
+    const noBtn = document.getElementById('no');
     const message = document.getElementById('message');
-    let yesSize = 20;
-    let noClickCount = 0;
 
-    const messages = [
-      "Soch lo...",
-      "Ek baar aur soch lo...",
-      "Itni bhi jaldi nahi hai!",
-      "Bas karo, maan bhi jao 😭",
-      "Arey ruk jao na!",
-      "Main ro dunga ab 😢"
+    const noMessages = [
+      "Soch lo... 😏",
+      "Ek baar aur soch lo 🥹",
+      "Itni bhi jaldi kya hai? 🤭",
+      "Bas karo, maan bhi jao 💖"
     ];
+
+    let noClickCount = 0;
 
     yesBtn.addEventListener('click', () => {
       document.body.innerHTML = `
-        <div style="text-align:center; font-size: 2.5em; color:#e6005c; padding: 30px;">
-          💖 Finally! I knew it, Pooja ji 💖<br><br>
-          <span style="font-size: 1.5em;">Get ready for a beautiful journey ahead 😊</span>
+        <div style="text-align:center; padding-top:100px;">
+          <h1>Finally! I knew it, Pooja ji ❤</h1>
+          <img src="https://media.giphy.com/media/g9582DNuQppxC/giphy.gif" width="250">
         </div>`;
     });
 
-    function moveButton() {
-      let x = Math.random() * (window.innerWidth - 100);
-      let y = Math.random() * (window.innerHeight - 100);
-      noBtn.style.left = \\${x}px\;
-      noBtn.style.top = \\${y}px\;
-
-      let msg = messages[Math.min(noClickCount, messages.length - 1)];
-      message.innerText = msg;
-      message.style.left = \\${x}px\;
-      message.style.top = \\${y + 50}px\;
-
-      yesSize += 10;
-      yesBtn.style.fontSize = \\${yesSize}px\;
-
+    noBtn.addEventListener('click', () => {
       noClickCount++;
-    }
 
-    noBtn.addEventListener('mouseenter', moveButton);
-    noBtn.addEventListener('click', moveButton);
+      yesBtn.style.transform = scale(${1 + noClickCount * 0.1});
+
+      const newMessage = document.createElement("div");
+      newMessage.innerText = noMessages[Math.min(noClickCount - 1, noMessages.length - 1)];
+      newMessage.style.fontSize = "14px";
+      newMessage.style.color = "red";
+      newMessage.style.marginTop = "5px";
+      noBtn.parentNode.insertBefore(newMessage, noBtn.nextSibling);
+
+      const angle = Math.random() * 2 * Math.PI;
+      const radius = 100 + noClickCount * 10;
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+
+      noBtn.style.left = ${Math.min(window.innerWidth - 100, Math.max(0, window.innerWidth / 2 + x))}px;
+      noBtn.style.top = ${Math.min(window.innerHeight - 50, Math.max(0, window.innerHeight / 2 + y))}px;
+    });
   </script>
-
 </body>
 </html>
